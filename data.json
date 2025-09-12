@@ -6,6 +6,22 @@
 	"email": "",
 	"projects": {
 		"blacklist": [],
-		"heroNames": []
+		"heroNames": [],
+		"useLocal": false
+	},
+	"heroRoles": [
+		"Full‑Stack Developer",
+		"Data Scientist",
+		"Open Source Enthusiast"
+	],
+	"background": {
+		"useVanta": true,
+		"vantaEffect": "dots",
+		"vantaOptions": {
+			"color": "#547eb6",
+			"color2": "#a28c7c",
+			"backgroundColor": "#000000",
+			"showLines": false
+		}
 	}
 }

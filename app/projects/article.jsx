@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { FaGithub } from "react-icons/fa";
 import { GoDependabot, GoEye, GoEyeClosed, GoStar } from 'react-icons/go';
 import { SiGithubcopilot } from 'react-icons/si';
@@ -8,6 +9,7 @@ import { getTrafficPageViews, getDependabotAlerts, getCopilotPRs } from "../data
 export const Article = async ({ project }) => {
 
     const appLink = project.homepage ? project.homepage : project.html_url;
+    const localImage = project.image || null;
 
     /** Repository visitors info. */
     let views = <span title="Can't get traffic data for someone else's repo." className="flex items-center gap-1"><GoEyeClosed className="w-4 h-4" /></span>;
@@ -42,6 +44,16 @@ export const Article = async ({ project }) => {
 
     return (
         <article className="p-4 md:p-8">
+            {/* Optional project image (local mode or custom for remote) */}
+            {localImage ? (
+                localImage.startsWith('http') ? (
+                    <img src={localImage} alt={project.name}
+                        className="w-full h-40 object-cover rounded-md mb-3 opacity-90 hover:opacity-100 transition" />
+                ) : (
+                    <Image src={localImage} alt={project.name} width={800} height={400}
+                        className="w-full h-40 object-cover rounded-md mb-3 opacity-90 hover:opacity-100 transition" />
+                )
+            ) : null}
             <div className="flex justify-between gap-2 items-center">
                 <span className="text-xs duration-1000 text-zinc-200 group-hover:text-white group-hover:border-zinc-200 drop-shadow-orange">
                     {/* <Image src={`https://raw.githubusercontent.com/jirihofman/${project.name}/${project.default_branch}/public/favicon.ico`} alt={project.name} width={24} height={24} placeholder="blur-sm" /> */}

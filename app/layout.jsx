@@ -1,6 +1,8 @@
 import "../global.css";
 import LocalFont from "next/font/local";
 import data from "../data.json";
+import AnimatedBackground from './components/animated-background';
+import VantaBackground from './components/vanta-background';
 
 const username = process.env.GITHUB_USERNAME || data.githubUsername;
 const displayName = data.displayName || username;
@@ -47,6 +49,7 @@ export default function RootLayout({
 					process.env.NODE_ENV === "development" ? "debug-screens" : ''
 				}`}
 			>
+			<VantaBackground />
 				{children}
 			</body>
 		</html>

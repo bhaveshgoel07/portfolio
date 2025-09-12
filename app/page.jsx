@@ -6,6 +6,7 @@ import { ProfileOrganizations } from "./components/orgs";
 import { RecentActivity } from "./components/recent-activity";
 import { getUser } from "./data";
 import LoadingIndicator from "./components/loading-indicator";
+import TypingRotator from "./components/typing-rotator";
 
 const navigation = [
 	{ name: "Projects", href: "/projects" },
@@ -58,7 +59,7 @@ const LandingComponent = async ({ searchParams: { customUsername } }) => {
 	const promise = getUser(username);
 
 	return (
-		<div className="flex flex-col items-center justify-center w-screen min-h-screen overflow-y-auto bg-linear-to-tl from-black via-zinc-600/20 to-black">
+		<div className="flex flex-col items-center justify-center w-screen min-h-screen overflow-y-auto">
 			<nav className="my-16 animate-fade-in">
 				<ul className="flex items-center justify-center gap-4">
 					{navigation.map((item) => (
@@ -75,7 +76,7 @@ const LandingComponent = async ({ searchParams: { customUsername } }) => {
 					<TryYourself customUsername={customUsername} />
 				</ul>
 			</nav>
-			<div className="hidden w-screen h-px animate-glow md:block animate-fade-left bg-linear-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
+			{/* Decorative glow removed to keep background clean */}
 
 			<h1 className="flex items-center z-10 text-4xl hover:scale-110 text-transparent duration-1000 cursor-default text-edge-outline animate-title font-display sm:text-6xl md:text-9xl whitespace-nowrap bg-clip-text bg-white p-5">
 				{username}
@@ -84,7 +85,12 @@ const LandingComponent = async ({ searchParams: { customUsername } }) => {
 				</Suspense>
 			</h1>
 
-			<div className="hidden w-screen h-px animate-glow md:block animate-fade-right bg-linear-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
+			{/* Rotating roles under the name */}
+			<div className="z-10 -mt-6">
+				<TypingRotator items={(data.heroRoles && data.heroRoles.length ? data.heroRoles : ["Full‑Stack Developer", "Data Scientist"])}/>
+			</div>
+
+			{/* Decorative glow removed to keep background clean */}
 			<div className="my-16 text-center animate-fade-in">
 				<h2 className="text-lg text-zinc-500">
 					<Suspense fallback={<div className="w-full h-px min-h-28">Loading...</div>}>
