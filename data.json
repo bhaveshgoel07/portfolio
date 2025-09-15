@@ -1,18 +1,21 @@
 {
-	"description": "My hobby projects, most of them are Next.js apps deployed to Vercel.",
-	"githubUsername": "octocat",
+	"description": "Increasing shareholder's value as we speak",
+	"githubUsername": "Bhaveshgoel07",
 	"avatarUrl": "",
-	"displayName": "",
+	"displayName": "Bhavesh Goel",
 	"email": "",
 	"projects": {
 		"blacklist": [],
 		"heroNames": [],
-		"useLocal": false
+		"useLocal": true
 	},
 	"heroRoles": [
 		"Full‑Stack Developer",
 		"Data Scientist",
-		"Open Source Enthusiast"
+		"ML Engineer",
+                "AI Engineer",
+                "Automation Engineer",
+                "LLM Engineer"
 	],
 	"background": {
 		"useVanta": true,

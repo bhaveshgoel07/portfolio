@@ -1,5 +1,13 @@
 [
   {
+    "name": "Animals Explain",
+    "description": "A fun project that explains things with animals.",
+    "homepage": "https://animals-explain.vercel.app/",
+    "repo": "https://github.com/yourusername/animals-explain",
+    "image": "https://animals-explain.vercel.app/og.png",
+    "featured": true
+  },
+  {
     "name": "my-portfolio",
     "description": "Personal portfolio built with Next.js and Tailwind CSS.",
     "homepage": "https://example.com",
