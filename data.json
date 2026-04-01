@@ -1,21 +1,21 @@
 {
-	"description": "Increasing shareholder's value as we speak",
-	"githubUsername": "Bhaveshgoel07",
+	"description": "I build agentic systems, applied ML tools, and product-focused software that is meant to be used, not just demoed.",
+	"githubUsername": "bhaveshgoel07",
 	"avatarUrl": "",
 	"displayName": "Bhavesh Goel",
-	"email": "",
+	"email": "bhaveshgoel07@gmail.com",
 	"projects": {
 		"blacklist": [],
 		"heroNames": [],
 		"useLocal": true
 	},
 	"heroRoles": [
-		"Full‑Stack Developer",
+		"Full-Stack Developer",
 		"Data Scientist",
 		"ML Engineer",
-                "AI Engineer",
-                "Automation Engineer",
-                "LLM Engineer"
+		"AI Engineer",
+		"Automation Engineer",
+		"LLM Engineer"
 	],
 	"background": {
 		"useVanta": true,

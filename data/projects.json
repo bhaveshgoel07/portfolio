@@ -1,30 +1,121 @@
 [
   {
-    "name": "Animals Explain",
-    "description": "A fun project that explains things with animals.",
-    "homepage": "https://animals-explain.vercel.app/",
-    "repo": "https://github.com/yourusername/animals-explain",
-    "image": "https://animals-explain.vercel.app/og.png",
-    "featured": true
+    "name": "NeuroAnim",
+    "slug": "neuroanim",
+    "category": "AI video pipeline",
+    "status": "Live demo",
+    "updated": "2025-12-01",
+    "homepage": "https://huggingface.co/spaces/MCP-1st-Birthday/manim-mcp",
+    "repo": "https://github.com/bhaveshgoel07/manim-agent",
+    "featured": true,
+    "tagline": "Turns a topic prompt into an educational animation with narration, quiz questions, and final video output.",
+    "description": "Built a Gradio-based generation system that plans the lesson, writes Manim code, renders video, synthesizes audio, and packages the result into a usable STEM explainer.",
+    "stack": [
+      "Python",
+      "Manim",
+      "LangGraph",
+      "Gradio",
+      "ElevenLabs",
+      "Blaxel"
+    ],
+    "proof": [
+      "Prompt to concept plan to narration to Manim code to render to voiceover to quiz flow is wired end to end.",
+      "Includes audience and quality controls plus progress-aware status updates in the Gradio interface.",
+      "Supports cloud rendering and text-to-speech integrations for a production-style content pipeline."
+    ],
+    "accent": {
+      "from": "#f59e0b",
+      "to": "#fb7185",
+      "glow": "rgba(245, 158, 11, 0.26)"
+    }
   },
   {
-    "name": "my-portfolio",
-    "description": "Personal portfolio built with Next.js and Tailwind CSS.",
-    "homepage": "https://example.com",
-    "repo": "https://github.com/yourname/my-portfolio",
-    "image": "/projects/my-portfolio.jpg",
-    "created_at": "2024-04-20T00:00:00.000Z",
-    "stars": 12,
-    "featured": true
-  },
-  {
-    "name": "data-science-starter",
-    "description": "Collection of notebooks and utilities for data exploration.",
+    "name": "Naradbot",
+    "slug": "naradbot",
+    "category": "Agentic workflow",
+    "status": "Active build",
+    "updated": "2026-03-29",
     "homepage": "",
-    "repo": "https://github.com/yourname/data-science-starter",
-    "image": "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1200&q=80&auto=format&fit=crop",
-    "created_at": "2023-11-02T00:00:00.000Z",
-    "stars": 3,
-    "featured": false
+    "repo": "https://github.com/bhaveshgoel07/Naradbot",
+    "featured": true,
+    "tagline": "Personal agent that scores Hacker News, summarizes signal, and ships digests into Discord.",
+    "description": "Designed a LangGraph-driven workflow with FastAPI, Discord delivery, scheduler support, scoring branches, and persistence so the system can run as an actual assistant instead of a toy chat loop.",
+    "stack": [
+      "Python",
+      "FastAPI",
+      "LangGraph",
+      "Discord.py",
+      "SQLite",
+      "APScheduler"
+    ],
+    "proof": [
+      "Readable graph nodes handle fetch, dedupe, scoring, categorization, summarization, publishing, and run persistence.",
+      "Parallel editorial and opportunity scoring branches merge before digest generation.",
+      "Supports scheduled jobs, manual API triggers, Discord posting, and deployment paths for always-on or Blaxel job execution."
+    ],
+    "accent": {
+      "from": "#38bdf8",
+      "to": "#22c55e",
+      "glow": "rgba(56, 189, 248, 0.22)"
+    }
+  },
+  {
+    "name": "P2P Streamer",
+    "slug": "p2p-streamer",
+    "category": "Streaming system",
+    "status": "Public repo",
+    "updated": "2026-03-23",
+    "homepage": "",
+    "repo": "https://github.com/bhaveshgoel07/p2p-streamer",
+    "featured": false,
+    "tagline": "Torrent-backed video player that starts fast, supports subtitles, and falls back to live transcoding.",
+    "description": "Built a Node server plus React client that ingests magnet links or .torrent files, prioritizes playback-friendly pieces, and streams media with range support before the full download completes.",
+    "stack": [
+      "Node.js",
+      "React",
+      "Vite",
+      "WebTorrent",
+      "ffmpeg",
+      "SQLite"
+    ],
+    "proof": [
+      "Accepts magnet URIs and .torrent uploads, then persists sessions and watch progress in SQLite.",
+      "Direct play uses HTTP range responses; unsupported formats fall back to on-the-fly ffmpeg transcoding.",
+      "Sidecar subtitles are exposed as WebVTT for browser playback and external players."
+    ],
+    "accent": {
+      "from": "#a78bfa",
+      "to": "#ec4899",
+      "glow": "rgba(167, 139, 250, 0.22)"
+    }
+  },
+  {
+    "name": "Gesture Cursor",
+    "slug": "gesture-cursor",
+    "category": "Computer vision utility",
+    "status": "Repo coming soon",
+    "updated": "2026-03-08",
+    "homepage": "",
+    "repo": "",
+    "featured": false,
+    "tagline": "Hand-tracked cursor control with gesture-based clicks and runtime tuning for real desktop use.",
+    "description": "Built a low-latency computer vision loop that maps finger motion to cursor movement, toggles tracking with a held pinch, and supports click gestures without requiring a mouse.",
+    "stack": [
+      "Python",
+      "OpenCV",
+      "MediaPipe",
+      "Computer Vision",
+      "Automation"
+    ],
+    "proof": [
+      "Threaded camera capture keeps latency low while the hand-tracking loop stays responsive.",
+      "Supports both MediaPipe legacy solutions and Tasks API builds, including first-run model download.",
+      "Handles left-click, right-click, smoothing, cursor margins, and backend selection for X11, Wayland, or macOS."
+    ],
+    "accent": {
+      "from": "#14b8a6",
+      "to": "#3b82f6",
+      "glow": "rgba(20, 184, 166, 0.22)"
+    }
   }
 ]

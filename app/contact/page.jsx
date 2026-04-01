@@ -1,113 +1,123 @@
-import { FaGithub } from "react-icons/fa";
-import { GoMail, GoPerson } from 'react-icons/go';
 import Link from "next/link";
-import { FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { Navigation } from "../components/nav";
-import { Card } from "../components/card";
+import { GoMail, GoPerson } from "react-icons/go";
 import data from "../../data.json";
-import { getUser, getSocialAccounts } from "../data";
+import { getSocialAccounts, getUser } from "../data";
+import { Navigation } from "../components/nav";
 
 // TODO: make it edge once Turbopack supports it.
-export const runtime = 'nodejs';
+export const runtime = "nodejs";
 
 export default async function Contacts(props) {
-    const searchParams = await props.searchParams;
+	const searchParams = await props.searchParams;
+	const customUsername = searchParams?.customUsername;
+	const username = customUsername || process.env.GITHUB_USERNAME || data.githubUsername;
 
-    const {
-        customUsername
-    } = searchParams;
+	const [user, githubSocials] = await Promise.all([
+		getUser(username).catch(() => ({ email: data.email })),
+		getSocialAccounts(username).catch(() => []),
+	]);
+	const socials = Array.isArray(githubSocials) ? githubSocials : [];
 
-    const username = customUsername || process.env.GITHUB_USERNAME || data.githubUsername;
-    // Get both user and socials in parallel.
-    const userData = getUser(username);
-    const socialsData = getSocialAccounts(username);
-    const [user, githubSocials] = await Promise.all([userData, socialsData]);
-    const email = user.email || data.email;
-    const contacts = [];
-    if (email) {
+	const contacts = [];
+	const email = user?.email || data.email;
+
+	if (email) {
 		contacts.push({
 			icon: <GoMail size={20} />,
-			href: "mailto:" + email,
+			href: `mailto:${email}`,
 			label: "Email",
-			handle: email,
+			// handle: email,
 		});
 	}
-    contacts.push({
+
+	contacts.push({
 		icon: <FaGithub size={20} />,
-		href: "https://github.com/" + username,
-		label: "Github",
-		handle: username,
+		href: `https://github.com/${username}`,
+		label: "GitHub",
+		// handle: username,
 	});
 
-    githubSocials.forEach((s) => {
-		switch (s.provider) {
+	socials.forEach((social) => {
+		switch (social.provider) {
 			case "linkedin":
 				contacts.push({
 					icon: <FaLinkedin size={20} />,
-					href: s.url,
-					label: s.provider,
-					// Extract last aprt of the url.
-					handle: s.url.split("/").pop(),
+					href: social.url,
+					label: "LinkedIn",
+					handle: social.url.split("/").filter(Boolean).pop(),
 				});
 				break;
 			case "twitter":
 				contacts.push({
 					icon: <FaXTwitter size={20} />,
-					href: s.url,
-					label: s.provider,
-					// Extract last aprt of the url.
-					handle: s.url.split("/").pop(),
+					href: social.url,
+					label: "Twitter",
+					handle: social.url.split("/").filter(Boolean).pop(),
 				});
 				break;
 			default:
 				contacts.push({
 					icon: <GoPerson size={20} />,
-					href: s.url,
-					// Extract domain from url.
-					label: s.url.split("/")[2],
-					// Extract last part of the url. Might not make sense in some cases.
-					// handle: s.url.split("/").pop(),
+					href: social.url,
+					label: social.url.split("/")[2],
+					handle: social.url.replace(/^https?:\/\//, ""),
 				});
 				break;
 		}
 	});
 
-    return (
-		<div className=" bg-linear-to-tl from-zinc-900/0 via-zinc-900 to-zinc-900/0">
-			<Navigation />
-			<div className="container flex items-center justify-center min-h-screen px-4 mx-auto">
-				<div className="grid w-full grid-cols-1 gap-8 mx-auto mt-32 sm:mt-0 sm:grid-cols-3 lg:gap-16">
-					{contacts.map((s) => {
-						// My email sucks, so I'm trying to make it fit in the grid.
-						const emailTransform = s.label === 'Email' ? 'sm:rotate-45 md:rotate-0 lg:rotate-45 xl:rotate-0' : '';
+	// Ensure LinkedIn is always present
+	if (!contacts.some((c) => c.label === "LinkedIn")) {
+		contacts.push({
+			icon: <FaLinkedin size={20} />,
+			href: "https://linkedin.com/in/bhaveshgoel07",
+			label: "LinkedIn",
+			// handle: "bhaveshgoel07",
+		});
+	}
 
-						return (
-							<Card key={s.label}>
-								<Link
-									href={s.href}
-									target="_blank"
-									className="p-4 relative flex flex-col items-center gap-4 duration-700 group md:gap-8 md:py-24 lg:pb-48 md:p-16 sm:p-8"
-								>
-									<span
-										className="absolute w-px h-2/3 bg-linear-to-b from-zinc-500 via-zinc-500/50 to-transparent"
-										aria-hidden="true"
-									/>
-									<span className="relative z-10 flex items-center justify-center w-12 h-12 text-sm duration-1000 border rounded-full text-zinc-200 group-hover:text-white group-hover:bg-zinc-900 border-zinc-500 bg-zinc-900 group-hover:border-zinc-200 drop-shadow-orange">
-										{s.icon}
-									</span>{" "}
-									<div className="z-10 flex flex-col items-center">
-										<span className={`whitespace-nowrap text-xl font-medium duration-150 lg:text-3xl text-zinc-200 group-hover:text-white font-display ${emailTransform}`}>
-											{s.handle}
-										</span>
-										<span className="mt-4 text-sm text-center duration-1000 text-zinc-400 group-hover:text-zinc-200">
-											{s.label}
-										</span>
-									</div>
-								</Link>
-							</Card>
-						)
-					})}
+	return (
+		<div className="pb-20">
+			<Navigation />
+
+			<div className="mx-auto max-w-7xl px-6 pt-14 sm:px-8 lg:px-10 lg:pt-24">
+				<section className="rounded-[34px] border border-white/[0.1] bg-black/[0.28] p-8 shadow-[0_28px_90px_rgba(0,0,0,0.28)] backdrop-blur-xl md:p-10">
+					<p className="text-xs uppercase tracking-[0.4em] text-zinc-500">Contact</p>
+					<h1 className="mt-4 max-w-3xl text-4xl font-display text-zinc-50 sm:text-5xl">
+						If the work looks useful, reach out directly
+					</h1>
+					<p className="mt-5 max-w-2xl text-base leading-8 text-zinc-300">
+						I am easiest to reach through GitHub and any linked socials below. If an email is available on the profile, it is included too.
+					</p>
+				</section>
+
+				<div className="mt-8 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+					{contacts.map((contact) => (
+						<Link
+							key={`${contact.label}-${contact.handle}`}
+							href={contact.href}
+							target="_blank"
+							rel="noreferrer"
+							className="group rounded-[28px] border border-white/[0.1] bg-white/[0.03] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.2)] backdrop-blur-lg transition hover:-translate-y-1 hover:border-white/[0.2] hover:bg-white/[0.05]"
+						>
+							<div className="flex h-full flex-col">
+								<span className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/[0.1] bg-white/[0.08] text-zinc-100">
+									{contact.icon}
+								</span>
+								<p className="mt-8 text-xs uppercase tracking-[0.34em] text-zinc-500">
+									{contact.label}
+								</p>
+								<p className="mt-3 break-all text-2xl font-display text-zinc-50">
+									{contact.handle}
+								</p>
+								<p className="mt-4 text-sm text-zinc-400">
+									Open {contact.label.toLowerCase()}
+								</p>
+							</div>
+						</Link>
+					))}
 				</div>
 			</div>
 		</div>

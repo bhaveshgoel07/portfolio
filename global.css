@@ -2,6 +2,61 @@
 
 @config './tailwind.config.js';
 
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: #f4f4f5;
+  background-color: #04050b;
+  background-image:
+    radial-gradient(circle at top, rgba(56, 189, 248, 0.12), transparent 28%),
+    radial-gradient(circle at 85% 20%, rgba(249, 115, 22, 0.1), transparent 22%),
+    linear-gradient(180deg, rgba(5, 8, 22, 0.82), rgba(3, 6, 18, 0.96));
+}
+
+::selection {
+  background: rgba(244, 114, 182, 0.28);
+  color: #ffffff;
+}
+
+/* Smooth scroll-linked transitions */
+* {
+  scroll-margin-top: 5rem;
+}
+
+/* Subtle glow on focused interactive elements */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid rgba(167, 139, 250, 0.5);
+  outline-offset: 2px;
+  border-radius: 9999px;
+}
+
+/* Custom scrollbar for a premium feel */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
@@ -24,5 +79,4 @@
   .text-edge-outline {
     -webkit-text-stroke: 1px rgba(255,255,255,0.3);
   }
-} 
-
+}

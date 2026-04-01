@@ -13,7 +13,7 @@ export const metadata = {
 		default: [username, '\'s portfolio'].join(""),
 		template: "%s | " + data.displayName + "'s portfolio",
 	},
-	description: 'GitHub portfolio for ' + displayName,
+	description: data.description || ("Portfolio for " + displayName),
 	robots: {
 		index: true,
 		follow: true,
@@ -47,7 +47,7 @@ export default function RootLayout({
 			<body
 				className={`bg-black ${
 					process.env.NODE_ENV === "development" ? "debug-screens" : ''
-				}`}
+				} antialiased`}
 			>
 			<VantaBackground />
 				{children}
